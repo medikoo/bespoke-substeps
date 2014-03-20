@@ -1,0 +1,31 @@
+.bespoke-slide .substep {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.bespoke-slide .substep.inactive {
+	opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+}
+.bespoke-slide li.substep.inactive {
+	-webkit-transform: translateX(-10px) translateZ(-10px) rotateY(20deg);
+	-moz-transform: translateX(-10px) translateZ(-10px) rotateY(20deg);
+	-o-transform: translateX(-10px) translateZ(-10px) rotateY(20deg);
+	-ms-transform: translateX(-10px) translateZ(-10px) rotateY(20deg);
+	transform: translateX(-10px) translateZ(-10px) rotateY(20deg);
+}
+@media print {
+	.bespoke-slide .substep.inactive {
+		opacity: 1;
+		-ms-filter: none;
+		filter: none;
+	}
+}
+.bespoke-slide .substep.active {
+	opacity: 1;
+	-ms-filter: none;
+	filter: none;
+}
