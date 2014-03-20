@@ -1,8 +1,11 @@
 # bespoke-substeps
 ## Substeps for [Bespoke.js](https://github.com/markdalgleish/bespoke.js) presentations
 
-Similar and initially inspired on [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets)
-Difference is that with _substeps_ you can customize order of display (not necesarry as it's in DOM), and configure steps to appear in parallel.
+### Similar and initially inspired on [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets).
+
+Differences:
+* Order of display can be customized (so it's not necesarily as in DOM)
+* Separated DOM elements can be configured to appear in parallel
 
 ### Usage
 
