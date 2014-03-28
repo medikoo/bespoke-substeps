@@ -13,8 +13,9 @@ getSubsteps = memoize(function (element) {
 		var order = Number(el.dataset.order);
 		if (isNaN(order)) order = (defaultOrder += 0.01);
 		else defaultOrder = order;
-		if (!map[order]) map[order] = [el];
-		else map[order].push(el);
+		if (!map[order]) map[order] = {};
+		if (!map[order].show) map[order].show = [el];
+		else map[order].show.push(el);
 	});
 	return keys(map).sort(byNum).map(function (order) { return map[order]; });
 });
@@ -26,7 +27,7 @@ module.exports = function (deck/*, options*/) {
 		var substep = toPositiveInteger(e.substep);
 		getSubsteps(e.slide).forEach(function (els, index) {
 			var visible = substep > index;
-			els.forEach(function (el) {
+			els.show.forEach(function (el) {
 				el.classList[visible ? 'add' : 'remove']('active');
 				el.classList[visible ? 'remove' : 'add']('inactive');
 			});
