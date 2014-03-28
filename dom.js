@@ -8,7 +8,7 @@ var toPositiveInteger = require('es5-ext/lib/Number/to-uint')
   , actions = Object.create(null)
   , getSubsteps;
 
-actions.show = actions.hide = actions.remove = true;
+actions.display = actions.show = actions.hide = actions.remove = true;
 
 getSubsteps = memoize(function (element) {
 	var map = {}, defaultOrder = 0;
@@ -41,6 +41,12 @@ module.exports = function (deck/*, options*/) {
 				els.hide.forEach(function (el) {
 					el.classList[isAfter ? 'remove' : 'add']('active');
 					el.classList[isAfter ? 'add' : 'remove']('inactive');
+				});
+			}
+			if (els.display) {
+				els.display.forEach(function (el) {
+					el.classList[isAfter ? 'add' : 'remove']('displayed');
+					el.classList[isAfter ? 'remove' : 'add']('removed');
 				});
 			}
 			if (els.remove) {
