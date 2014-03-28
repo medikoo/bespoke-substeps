@@ -8,7 +8,7 @@ var toPositiveInteger = require('es5-ext/lib/Number/to-uint')
   , getSubsteps;
 
 getSubsteps = memoize(function (element) {
-	var map = {}, defaultOrder = -0.01;
+	var map = {}, defaultOrder = 0;
 	forEach.call(element.querySelectorAll('.substep'), function (el) {
 		var order = Number(el.dataset.order);
 		if (isNaN(order)) order = (defaultOrder += 0.01);
