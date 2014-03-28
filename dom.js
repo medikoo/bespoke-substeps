@@ -12,6 +12,7 @@ getSubsteps = memoize(function (element) {
 	forEach.call(element.querySelectorAll('.substep'), function (el) {
 		var order = Number(el.dataset.order);
 		if (isNaN(order)) order = (defaultOrder += 0.01);
+		else defaultOrder = order;
 		if (!map[order]) map[order] = [el];
 		else map[order].push(el);
 	});
