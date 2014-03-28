@@ -30,11 +30,23 @@ module.exports = function (deck/*, options*/) {
 	deck.on('activate', function (e) {
 		var substep = toPositiveInteger(e.substep);
 		getSubsteps(e.slide).forEach(function (els, index) {
-			var visible = substep > index;
+			var isAfter = substep > index;
 			if (els.show) {
 				els.show.forEach(function (el) {
-					el.classList[visible ? 'add' : 'remove']('active');
-					el.classList[visible ? 'remove' : 'add']('inactive');
+					el.classList[isAfter ? 'add' : 'remove']('active');
+					el.classList[isAfter ? 'remove' : 'add']('inactive');
+				});
+			}
+			if (els.hide) {
+				els.hide.forEach(function (el) {
+					el.classList[isAfter ? 'remove' : 'add']('active');
+					el.classList[isAfter ? 'add' : 'remove']('inactive');
+				});
+			}
+			if (els.remove) {
+				els.remove.forEach(function (el) {
+					el.classList[isAfter ? 'remove' : 'add']('displayed');
+					el.classList[isAfter ? 'add' : 'remove']('removed');
 				});
 			}
 		});
