@@ -8,7 +8,8 @@ var toPositiveInteger = require('es5-ext/lib/Number/to-uint')
   , actions = Object.create(null)
   , getSubsteps;
 
-actions.display = actions.show = actions.hide = actions.remove = true;
+actions.display = actions.show = actions.hide = actions.remove =
+	actions.mark = true;
 
 getSubsteps = memoize(function (element) {
 	var map = {}, defaultOrder = 0;
@@ -30,7 +31,8 @@ module.exports = function (deck/*, options*/) {
 	deck.on('activate', function (e) {
 		var substep = toPositiveInteger(e.substep);
 		getSubsteps(e.slide).forEach(function (els, index) {
-			var isAfter = substep > index;
+			var current = substep === index + 1
+			  , isAfter = substep > index;
 			if (els.show) {
 				els.show.forEach(function (el) {
 					el.classList[isAfter ? 'add' : 'remove']('active');
@@ -53,6 +55,12 @@ module.exports = function (deck/*, options*/) {
 				els.remove.forEach(function (el) {
 					el.classList[isAfter ? 'remove' : 'add']('displayed');
 					el.classList[isAfter ? 'add' : 'remove']('removed');
+				});
+			}
+			if (els.mark) {
+				els.mark.forEach(function (el) {
+					el.classList[current ? 'add' : 'remove']('marked');
+					el.classList[current ? 'remove' : 'add']('unmarked');
 				});
 			}
 		});

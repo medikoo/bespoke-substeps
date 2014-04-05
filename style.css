@@ -35,3 +35,7 @@
 .bespoke-slide .substep.removed {
 	display: none;
 }
+
+.bespoke-slide .substep.unmarked {
+	background: inherit;
+}
