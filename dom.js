@@ -8,7 +8,8 @@ var toPositiveInteger = require('es5-ext/lib/Number/to-uint')
   , actions = Object.create(null)
   , getSubsteps;
 
-actions.display = actions.show = actions.hide = actions.remove =
+actions.activate = actions.deactivate =
+	actions.insert = actions.remove =
 	actions.mark = true;
 
 getSubsteps = memoize(function (element) {
@@ -18,7 +19,7 @@ getSubsteps = memoize(function (element) {
 		if (isNaN(order)) order = (defaultOrder += 0.01);
 		else defaultOrder = order;
 		if (!map[order]) map[order] = {};
-		action = actions[el.dataset.action] ? el.dataset.action : 'show';
+		action = actions[el.dataset.action] ? el.dataset.action : 'activate';
 		if (!map[order][action]) map[order][action] = [el];
 		else map[order][action].push(el);
 	});
@@ -33,27 +34,27 @@ module.exports = function (deck/*, options*/) {
 		getSubsteps(e.slide).forEach(function (els, index) {
 			var current = substep === index + 1
 			  , isAfter = substep > index;
-			if (els.show) {
-				els.show.forEach(function (el) {
+			if (els.activate) {
+				els.activate.forEach(function (el) {
 					el.classList[isAfter ? 'add' : 'remove']('active');
 					el.classList[isAfter ? 'remove' : 'add']('inactive');
 				});
 			}
-			if (els.hide) {
-				els.hide.forEach(function (el) {
+			if (els.deactivate) {
+				els.deactivate.forEach(function (el) {
 					el.classList[isAfter ? 'remove' : 'add']('active');
 					el.classList[isAfter ? 'add' : 'remove']('inactive');
 				});
 			}
-			if (els.display) {
-				els.display.forEach(function (el) {
-					el.classList[isAfter ? 'add' : 'remove']('displayed');
+			if (els.insert) {
+				els.insert.forEach(function (el) {
+					el.classList[isAfter ? 'add' : 'remove']('inserted');
 					el.classList[isAfter ? 'remove' : 'add']('removed');
 				});
 			}
 			if (els.remove) {
 				els.remove.forEach(function (el) {
-					el.classList[isAfter ? 'remove' : 'add']('displayed');
+					el.classList[isAfter ? 'remove' : 'add']('inserted');
 					el.classList[isAfter ? 'add' : 'remove']('removed');
 				});
 			}
