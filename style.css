@@ -5,7 +5,7 @@
 	-ms-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
-/* show & hide actions */
+/* activate & deactivate actions */
 .bespoke-slide .substep.inactive {
 	opacity: 0;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
