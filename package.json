@@ -1,7 +1,7 @@
 {
   "name": "bespoke-substeps",
   "version": "0.1.0",
-  "description": "Bespoke.js interim steps",
+  "description": "Substeps for Bespoke.js presentations",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
     "bespoke",
