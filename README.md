@@ -5,6 +5,8 @@
 
 <img src="presentation-1.gif" />    <img src="presentation-2.gif" />
 
+You can see _bespoke-substeps_ in action in e.g. [Asynchronous JavaScript Interfaces](http://medikoo.com/asynchronous-javascript-interfaces/?notes) presentation
+
 #### Features
 
 * Order of display can be customized (via `data-order` attribute), so it doesn't necessary need to follow order in document
