@@ -3,7 +3,7 @@
 
 ### Similar and initially inspired on [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets).
 
-<img src="presentation-1.gif" /> <img src="presentation-2.gif" />
+<img src="presentation-1.gif" />    <img src="presentation-2.gif" />
 
 #### Features
 
