@@ -3,6 +3,8 @@
 
 ### Similar and initially inspired on [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets).
 
+<img src="presentation-1.gif" /> <img src="presentation-2.gif" />
+
 #### Features
 
 * Order of display can be customized (via `data-order` attribute), so it doesn't necessary need to follow order in document
