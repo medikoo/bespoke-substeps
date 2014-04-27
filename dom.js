@@ -1,7 +1,8 @@
 'use strict';
 
-var toPositiveInteger = require('es5-ext/lib/Number/to-uint')
-  , memoize           = require('memoizee/lib/regular')
+var toPositiveInteger = require('es5-ext/number/to-pos-integer')
+  , memoize           = require('memoizee/plain')
+  , getNormalizer     = require('memoizee/normalizers/get-1')
 
   , forEach = Array.prototype.forEach, keys = Object.keys
   , byNum = function (a, b) { return a - b; }
@@ -24,7 +25,7 @@ getSubsteps = memoize(function (element) {
 		else map[order][action].push(el);
 	});
 	return keys(map).sort(byNum).map(function (order) { return map[order]; });
-});
+}, { normalizer: getNormalizer() });
 
 module.exports = function (deck/*, options*/) {
 	var activeSubstep = 0;
