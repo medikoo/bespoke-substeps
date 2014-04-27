@@ -1,2 +1,6 @@
-v0.1.0  -- 2013.04.09
+v0.1.1  -- 2014.04.27
+* Improve documentation
+* Update internals to use latest versions of dependencies
+
+v0.1.0  -- 2014.04.09
 Initial
