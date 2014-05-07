@@ -1,22 +1,19 @@
 'use strict';
 
 var toPositiveInteger = require('es5-ext/number/to-pos-integer')
+  , primitiveSet      = require('es5-ext/object/primitive-set')
   , memoize           = require('memoizee/plain')
   , getNormalizer     = require('memoizee/normalizers/get-1')
 
   , forEach = Array.prototype.forEach, keys = Object.keys
   , byNum = function (a, b) { return a - b; }
-  , actions = Object.create(null)
+  , actions = primitiveSet('activate', 'deactivate', 'insert', 'remove', 'mark', 'class')
   , getSubsteps;
-
-actions.activate = actions.deactivate =
-	actions.insert = actions.remove =
-	actions.mark = true;
 
 getSubsteps = memoize(function (element) {
 	var map = {}, defaultOrder = 0;
 	forEach.call(element.querySelectorAll('.substep'), function (el) {
-		var order = Number(el.dataset.order), action;
+		var order = Number(el.dataset.order), action, data, names, classOrder;
 		if (isNaN(order)) order = (defaultOrder += 0.01);
 		else defaultOrder = order;
 		if (!map[order]) map[order] = {};
@@ -25,6 +22,19 @@ getSubsteps = memoize(function (element) {
 		if (action == null) {
 			if (el.nodeName.toLowerCase() === 'mark') action = 'mark';
 			else action = 'activate';
+		}
+		if (action === 'class') {
+			if (!el.dataset.names) throw new TypeError('Missing names for class configuration');
+			names = el.dataset.names.split(' ');
+			classOrder = order;
+			names.forEach(function (name) {
+				data = { el: el, name: name };
+				if (!map[classOrder]) map[classOrder] = {};
+				if (!map[classOrder].class) map[classOrder].class = [data];
+				else map[order][action].push(data);
+				classOrder += 0.001;
+			});
+			return;
 		}
 		if (!map[order][action]) map[order][action] = [el];
 		else map[order][action].push(el);
@@ -68,6 +78,11 @@ module.exports = function (deck/*, options*/) {
 				els.mark.forEach(function (el) {
 					el.classList[current ? 'add' : 'remove']('marked');
 					el.classList[current ? 'remove' : 'add']('unmarked');
+				});
+			}
+			if (els.class) {
+				els.class.forEach(function (data) {
+					data.el.classList[current ? 'add' : 'remove'](data.name);
 				});
 			}
 		});
