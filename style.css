@@ -37,5 +37,7 @@
 }
 
 .bespoke-slide .substep.unmarked {
-	background: inherit;
+	background: none;
+	color: inherit;
+	font-weight: inherit;
 }
