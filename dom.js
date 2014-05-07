@@ -20,7 +20,12 @@ getSubsteps = memoize(function (element) {
 		if (isNaN(order)) order = (defaultOrder += 0.01);
 		else defaultOrder = order;
 		if (!map[order]) map[order] = {};
-		action = actions[el.dataset.action] ? el.dataset.action : 'activate';
+		action = el.dataset.action;
+		if (!actions[action]) action = null;
+		if (action == null) {
+			if (el.nodeName.toLowerCase() === 'mark') action = 'mark';
+			else action = 'activate';
+		}
 		if (!map[order][action]) map[order][action] = [el];
 		else map[order][action].push(el);
 	});
