@@ -5,7 +5,7 @@ var toPositiveInteger = require('es5-ext/number/to-pos-integer')
   , memoize           = require('memoizee/plain')
   , getNormalizer     = require('memoizee/normalizers/get-1')
 
-  , forEach = Array.prototype.forEach, keys = Object.keys
+  , forEach = Array.prototype.forEach, keys = Object.keys, round = Math.round
   , byNum = function (a, b) { return a - b; }
   , actions = primitiveSet('activate', 'deactivate', 'insert', 'remove', 'mark', 'class')
   , getSubsteps;
@@ -33,13 +33,16 @@ getSubsteps = memoize(function (element) {
 				if (!map[classOrder].class) map[classOrder].class = [data];
 				else map[order][action].push(data);
 				classOrder += 0.001;
+				classOrder = round(classOrder * 1000) / 1000;
 			});
 			return;
 		}
 		if (!map[order][action]) map[order][action] = [el];
 		else map[order][action].push(el);
 	});
-	return keys(map).sort(byNum).map(function (order) { return map[order]; });
+	return keys(map).sort(byNum).map(function (order) {
+		console.log(order);
+		return map[order]; });
 }, { normalizer: getNormalizer() });
 
 module.exports = function (deck/*, options*/) {
