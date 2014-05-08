@@ -1,4 +1,9 @@
-v0.1.1  -- 2014.04.27
+v0.1.2  --  2014.05.08
+* Improve versality of styles for `mark` action
+* Assume `mark` action if on <mark> element
+* Introduce `class` action
+
+v0.1.1  --  2014.04.27
 * Improve documentation
 * Update internals to use latest versions of dependencies
 
