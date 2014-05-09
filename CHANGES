@@ -1,3 +1,6 @@
+v0.1.3  --  2014.05.09
+* Remove overleft log call
+
 v0.1.2  --  2014.05.08
 * Improve versality of styles for `mark` action
 * Assume `mark` action if on <mark> element
