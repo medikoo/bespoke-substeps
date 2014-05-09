@@ -40,9 +40,7 @@ getSubsteps = memoize(function (element) {
 		if (!map[order][action]) map[order][action] = [el];
 		else map[order][action].push(el);
 	});
-	return keys(map).sort(byNum).map(function (order) {
-		console.log(order);
-		return map[order]; });
+	return keys(map).sort(byNum).map(function (order) { return map[order]; });
 }, { normalizer: getNormalizer() });
 
 module.exports = function (deck/*, options*/) {
