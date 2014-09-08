@@ -24,11 +24,11 @@ You can see _bespoke-substeps_ in action in e.g. [Asynchronous JavaScript Interf
 ### Usage
 
 ```javascript
-bespoke.plugins.substeps = require('bespoke-substeps');
+var substeps = require('bespoke-substeps');
 
-bespoke.from(selector, {
-  substeps: true
-});
+bespoke.from(selector, [
+  substeps()
+]);
 ```
 
 Example HTML configuration
