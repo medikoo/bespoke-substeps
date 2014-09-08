@@ -43,71 +43,73 @@ getSubsteps = memoize(function (element) {
 	return keys(map).sort(byNum).map(function (order) { return map[order]; });
 }, { normalizer: getNormalizer() });
 
-module.exports = function (deck/*, options*/) {
-	var activeSubstep = 0;
+module.exports = function (/*options*/) {
+	return function (deck) {
+		var activeSubstep = 0;
 
-	deck.on('activate', function (e) {
-		var substep = toPositiveInteger(e.substep);
-		getSubsteps(e.slide).forEach(function (els, index) {
-			var current = substep === index + 1
-			  , isAfter = substep > index;
-			if (els.activate) {
-				els.activate.forEach(function (el) {
-					el.classList[isAfter ? 'add' : 'remove']('active');
-					el.classList[isAfter ? 'remove' : 'add']('inactive');
-				});
-			}
-			if (els.deactivate) {
-				els.deactivate.forEach(function (el) {
-					el.classList[isAfter ? 'remove' : 'add']('active');
-					el.classList[isAfter ? 'add' : 'remove']('inactive');
-				});
-			}
-			if (els.insert) {
-				els.insert.forEach(function (el) {
-					el.classList[isAfter ? 'add' : 'remove']('inserted');
-					el.classList[isAfter ? 'remove' : 'add']('removed');
-				});
-			}
-			if (els.remove) {
-				els.remove.forEach(function (el) {
-					el.classList[isAfter ? 'remove' : 'add']('inserted');
-					el.classList[isAfter ? 'add' : 'remove']('removed');
-				});
-			}
-			if (els.mark) {
-				els.mark.forEach(function (el) {
-					el.classList[current ? 'add' : 'remove']('marked');
-					el.classList[current ? 'remove' : 'add']('unmarked');
-				});
-			}
-			if (els.class) {
-				els.class.forEach(function (data) {
-					data.el.classList[current ? 'add' : 'remove'](data.name);
-				});
-			}
-		});
-		activeSubstep = substep;
-	});
-
-	deck.on('next', function () {
-		var activeSlide = deck.slide();
-		if (!getSubsteps(deck.slides[activeSlide])[activeSubstep]) return;
-		deck.slide(activeSlide, { substep: activeSubstep + 1 });
-		return false;
-	});
-
-	deck.on('prev', function () {
-		var activeSlide = deck.slide();
-		if (!activeSlide) return;
-		if (!activeSubstep) {
-			--activeSlide;
-			deck.slide(activeSlide, {
-				substep: getSubsteps(deck.slides[activeSlide]).length
+		deck.on('activate', function (e) {
+			var substep = toPositiveInteger(e.substep);
+			getSubsteps(e.slide).forEach(function (els, index) {
+				var current = substep === index + 1
+				  , isAfter = substep > index;
+				if (els.activate) {
+					els.activate.forEach(function (el) {
+						el.classList[isAfter ? 'add' : 'remove']('active');
+						el.classList[isAfter ? 'remove' : 'add']('inactive');
+					});
+				}
+				if (els.deactivate) {
+					els.deactivate.forEach(function (el) {
+						el.classList[isAfter ? 'remove' : 'add']('active');
+						el.classList[isAfter ? 'add' : 'remove']('inactive');
+					});
+				}
+				if (els.insert) {
+					els.insert.forEach(function (el) {
+						el.classList[isAfter ? 'add' : 'remove']('inserted');
+						el.classList[isAfter ? 'remove' : 'add']('removed');
+					});
+				}
+				if (els.remove) {
+					els.remove.forEach(function (el) {
+						el.classList[isAfter ? 'remove' : 'add']('inserted');
+						el.classList[isAfter ? 'add' : 'remove']('removed');
+					});
+				}
+				if (els.mark) {
+					els.mark.forEach(function (el) {
+						el.classList[current ? 'add' : 'remove']('marked');
+						el.classList[current ? 'remove' : 'add']('unmarked');
+					});
+				}
+				if (els.class) {
+					els.class.forEach(function (data) {
+						data.el.classList[current ? 'add' : 'remove'](data.name);
+					});
+				}
 			});
-		} else {
-			deck.slide(activeSlide, { substep: activeSubstep - 1 });
-		}
-		return false;
-	});
+			activeSubstep = substep;
+		});
+
+		deck.on('next', function () {
+			var activeSlide = deck.slide();
+			if (!getSubsteps(deck.slides[activeSlide])[activeSubstep]) return;
+			deck.slide(activeSlide, { substep: activeSubstep + 1 });
+			return false;
+		});
+
+		deck.on('prev', function () {
+			var activeSlide = deck.slide();
+			if (!activeSlide) return;
+			if (!activeSubstep) {
+				--activeSlide;
+				deck.slide(activeSlide, {
+					substep: getSubsteps(deck.slides[activeSlide]).length
+				});
+			} else {
+				deck.slide(activeSlide, { substep: activeSubstep - 1 });
+			}
+			return false;
+		});
+	};
 };
