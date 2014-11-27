@@ -23,13 +23,20 @@ You can see _bespoke-substeps_ in action in e.g. [Asynchronous JavaScript Interf
 
 ### Usage
 
-If CJS bundler you're using, supports CSS modules out of a box, then just do `require('bespoke-substeps')`.  
-Otherwise require strictly JS logic of plugin with `require('bespoke-substeps/dom')` and manually assure that styles placed in `style.css` are also loaded with your application.
+If CJS bundler you're using, supports CSS modules out of a box, then just do:
 
 ```javascript
-// Only if CJS bunlder supports CSS modules (otherwise 'bespoke-substeps/dom'):
-var substeps = require('bespoke-substeps');
+require('bespoke-substeps')`;
+```
+Otherwise require strictly JS logic of plugin with
+```javascript
+require('bespoke-substeps/dom');
+```
+and manually assure that styles placed in `style.css` are also loaded with your application.
 
+Then configure bespoke to use the plugin:
+
+```javascript
 bespoke.from(selector, [
   substeps()
 ]);
