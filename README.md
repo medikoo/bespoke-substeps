@@ -26,7 +26,7 @@ You can see _bespoke-substeps_ in action in e.g. [Asynchronous JavaScript Interf
 If CJS bundler you're using, supports CSS modules out of a box, then just do:
 
 ```javascript
-require('bespoke-substeps')`;
+require('bespoke-substeps');
 ```
 Otherwise require strictly JS logic of plugin with
 ```javascript
