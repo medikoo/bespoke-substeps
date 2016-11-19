@@ -1,3 +1,6 @@
+v1.0.1  --  2016.11.19
+* Fix no dataset support handling
+
 v1.0.0  --  2016.11.19
 * Abort gently in case of no dataset support
 * Improve documentation
