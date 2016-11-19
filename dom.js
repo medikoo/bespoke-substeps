@@ -13,7 +13,7 @@ var toPositiveInteger = require('es5-ext/number/to-pos-integer')
 getSubsteps = memoize(function (element) {
 	var map = {}, defaultOrder = 0;
 	forEach.call(element.querySelectorAll('.substep'), function (el) {
-		var order = Number(el.dataset.order), action, data, names, classOrder;
+		var order, action, data, names, classOrder;
 		if (!el.dataset) {
 			console.error(el + " cannot serve as substep wrapper due to no `dataset` support");
 			return;
