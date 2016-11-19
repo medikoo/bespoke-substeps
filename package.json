@@ -1,6 +1,6 @@
 {
   "name": "bespoke-substeps",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Substeps for Bespoke.js presentations",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
@@ -20,6 +20,15 @@
   },
   "peerDependencies": {
     "bespoke": "1"
+  },
+  "devDependencies": {
+    "xlint": "^0.2.2",
+    "xlint-jslint-medikoo": "^0.1.4"
+  },
+  "scripts": {
+    "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
+    "lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
+    "test": "node ./node_modules/tad/bin/tad"
   },
   "license": "MIT"
 }
