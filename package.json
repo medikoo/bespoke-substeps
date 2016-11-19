@@ -1,6 +1,6 @@
 {
   "name": "bespoke-substeps",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "Substeps for Bespoke.js presentations",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
@@ -15,8 +15,8 @@
     "url": "git://github.com/medikoo/bespoke-substeps.git"
   },
   "dependencies": {
-    "es5-ext": "~0.10.4",
-    "memoizee": "~0.3.7"
+    "es5-ext": "^0.10.12",
+    "memoizee": "^0.4.1"
   },
   "peerDependencies": {
     "bespoke": "1"

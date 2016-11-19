@@ -1,3 +1,9 @@
+v1.0.0  --  2016.11.19
+* Abort gently in case of no dataset support
+* Improve documentation
+* Fix spelling of LICENSE
+* Configure lint scripts
+
 v0.2.2  --  2014.09.09
 * Fix repository url in package.json
 
